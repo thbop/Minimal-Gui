@@ -1,5 +1,7 @@
 import pygame
 
+from .container import Containers
+from .renderer import Renderer
 
 class App:
     def __init__(self, title=None, width=1200, height=800):
@@ -12,6 +14,9 @@ class App:
 
         self.running = True
         self.clock = pygame.time.Clock()
+
+        self.containers = Containers(self)
+        self.renderer = Renderer(self)
     
     def create_window(self, title, width, height):
         """
