@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 
 import mingu as mg
+import definitions as df
 
 
 class App(mg.App):
@@ -9,20 +10,17 @@ class App(mg.App):
         pygame.init()
         super().__init__()
 
-        self.containers.add(
-            mg.Container( 'test', pygame.Rect(50, 50, 500, 500) )
-            )
-        self.containers.add_element( mg.Element( 'test', pygame.Rect(10, 10, 30, 30) ) )
-        
-        self.renderer.load_style('style.json')
+        self.containers.add( df.Container( 'test', pygame.Rect(50, 50, 500, 500) ) )
+        self.containers.add_element( df.Square( 'test', pygame.Rect(10, 10, 30, 30) ) )
     
     def run(self):
         while self.running:
             self.event_handler()
             
-            self.renderer.clear()
+            self.renderer.clear('#1e1a28')
 
             self.renderer.render()
+
 
             self.renderer.update()
 

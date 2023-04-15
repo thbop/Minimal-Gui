@@ -1,10 +1,11 @@
 import pygame
+from .element import Element
 
-class Container:
+class Container(Element):
     def __init__(self, name, rect):
         """Initializes a new Container"""
+        super().__init__('WINDOW', rect)
         self.name = name
-        self.rect = rect
         
         self.elements = []
     
