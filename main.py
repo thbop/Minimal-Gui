@@ -10,8 +10,11 @@ class App(mg.App):
         pygame.init()
         super().__init__()
 
-        self.containers.add( df.Container( 'test', pygame.Rect(50, 50, 500, 500) ) )
-        self.containers.add_element( df.Square( 'test', pygame.Rect(10, 10, 30, 30) ) )
+        self.containers.add( df.Container( 'side-panel', pygame.Rect(5, 5, (self.width/4)-10, self.height-10) ) )
+        self.containers.add_element( df.Button( 'side-panel', pygame.Rect(10, 10, 250, 20) ) )
+        self.containers.add_element( df.Text( 'side-panel', pygame.Rect(16, 14, 18, 0), 'Hello World' ) )
+
+        self.containers.add( df.Container( 'main-panel', pygame.Rect((self.width/4), 5, (self.width/4)*3-5, self.height-10) ) )
     
     def run(self):
         while self.running:
