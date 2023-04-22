@@ -1,6 +1,6 @@
 import pygame
 
-class Box:
+class BoxRender:
     """
     Generic Box renderer.
 
@@ -16,7 +16,7 @@ class Box:
             if self.style['border'] != None:
                 pygame.draw.rect(surf, self.style['border'], self.rect, self.style['border-thickness'], self.style['border-radius'])
 
-                if self.style['hover'] != None and self.check_mouse_hover():
+                if self.style['hover'] != None and self.sel:
                     pygame.draw.rect(surf, self.style['hover'], self.rect, self.style['border-thickness'], self.style['border-radius'])
 
 class TextRender:
@@ -29,6 +29,14 @@ class TextRender:
             self.font.render_to(surf, self.rect.topleft, self.text)
         else:
             self.font.render_to(surf, self.rect.topleft, self.text, self.style['color'])
+
+
+class TextBoxRender(BoxRender):
+
+    def render(self, surf):
+        super().render(surf)
+        y_padding = (self.rect.h - self.t_size + 4) / 2
+        self.font.render_to(surf, [ self.rect.x + 4, self.rect.y + y_padding ], self.text, self.style['color'])
 
 
 

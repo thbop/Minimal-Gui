@@ -1,6 +1,6 @@
 import mingu as mg
 
-class Container(mg.Container, mg.Box):
+class Container(mg.Container, mg.BoxRender):
     def __init__(self, name, rect):
         super().__init__(name, rect)
 
@@ -12,9 +12,12 @@ class Container(mg.Container, mg.Box):
             'hover': None #'#4d42ad'
         }
 
-class Button(mg.Element, mg.Box):
-    def __init__(self, name, rect):
+class Button(mg.Element, mg.BoxRender):
+    def __init__(self, name, rect, onclick=None):
         super().__init__(name, rect)
+
+        self.tags.append('button')
+        self.onclick = onclick
 
         self.style = {
             'background': '#26293f',
@@ -25,8 +28,37 @@ class Button(mg.Element, mg.Box):
         }
 
 class Text(mg.Text, mg.TextRender):
-    def __init__(self, name, rect, text):
-        super().__init__(name, rect, text)
+    def __init__(self, name, rect, text, size):
+        super().__init__(name, rect, text, size)
         self.style = {
             'color': '#FFFFFF'
+        }
+
+class Message(mg.Text, mg.TextBoxRender):
+    def __init__(self, name, rect, text, size):
+        super().__init__(name, rect, text, size)
+        
+        self.style = {
+            'background': '#26293f',
+            'border': '#26293f',
+            'border-radius': 8,
+            'border-thickness': 1,
+            'hover': '#4d42ad',
+            'color': '#ffffff',
+        }
+
+class TextBox(mg.Text, mg.TextBoxRender):
+    def __init__(self, name, rect, text, size, on_enter=None):
+        super().__init__(name, rect, text, size)
+
+        self.tags = ['sel', 'text', 'on_enter']
+        self.on_enter = on_enter
+
+        self.style = {
+            'background': '#26293f',
+            'border': '#26293f',
+            'border-radius': 8,
+            'border-thickness': 1,
+            'hover': '#4d42ad',
+            'color': '#ffffff',
         }

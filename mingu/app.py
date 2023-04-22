@@ -36,3 +36,16 @@ class App:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
+            if self.sel != None and 'sel' in self.sel.tags:
+                if event.type == pygame.TEXTINPUT:
+                    if 'text' in self.sel.tags:
+                        self.sel.text += event.text
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_BACKSPACE:
+                        if 'text' in self.sel.tags:
+                            self.sel.text = self.sel.text[:-1]
+                    elif event.key == pygame.K_RETURN:
+                        if 'text' in self.sel.tags and 'on_enter' in self.sel.tags:
+                            try:
+                                self.sel.on_enter()
+                            except: pass

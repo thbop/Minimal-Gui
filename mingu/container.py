@@ -30,15 +30,22 @@ class Containers:
     def remove(self, container):
         self.containers.remove(container)
     
-    def find(self, name):
+    def get(self, name):
         out = None
         for container in self.containers:
             if container.name == name:
                 out = container
         return out
     
+    def get_index(self, name):
+        out = None
+        for i, container in enumerate(self.containers, 0):
+            if container.name == name:
+                out = i
+        return out
+    
     def add_element(self, element):
-        container = self.find(element.master)
+        container = self.get(element.master)
         if container != None:
             # Offset element to fit container local space
             element.rect.x += container.rect.x
